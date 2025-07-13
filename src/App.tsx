@@ -1,10 +1,11 @@
-import { Nav, Product } from './components';
+import { Nav, Product, ModalPayment } from './components';
 
 function App() {
   return (
     <>
       <Nav />
       <Product />
+      <ModalPayment />
     </>
   );
 }
