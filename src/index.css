@@ -13,5 +13,12 @@
 
   scroll-behavior: smooth;
 
+  background-color: #f9fafb;
+
   font-size: clamp(0.875rem, 0.2vw + 0.9rem, 1.1rem);
+}
+
+@utility container {
+  width: min(768px, 95%);
+  margin: 0 auto;
 }
