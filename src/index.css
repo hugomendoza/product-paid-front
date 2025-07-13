@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+:root {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  scroll-behavior: smooth;
+
+  font-size: clamp(0.875rem, 0.2vw + 0.9rem, 1.1rem);
+}
