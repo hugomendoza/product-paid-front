@@ -44,7 +44,7 @@ export const Product = () => {
             </p>
           </div>
         </div>
-        <Button className="text-base sm:text-sm" onClick={() => increment(1)}>
+        <Button onClick={() => increment(1)}>
           <CreditCard /> Paga con tarjeta de crédito
         </Button>
       </div>

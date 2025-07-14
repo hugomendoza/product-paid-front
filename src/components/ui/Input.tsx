@@ -21,7 +21,7 @@ export const Input = ({
   return (
     <fieldset>
       {label && (
-        <label htmlFor={id} className="block text-sm mb-2">
+        <label htmlFor={id} className="block text-sm mb-2 text-slate-500">
           {label}
         </label>
       )}
@@ -31,7 +31,7 @@ export const Input = ({
           type={type}
           name={id}
           className={tw(
-            'focus-visible:outline-none h-10 px-4 border focus:ring-0 focus-visible:ring-0 rounded-lg placeholder:text-gray-400',
+            'focus-visible:outline-none h-10 px-4 border border-slate-300 focus:ring-0 focus-visible:ring-0 rounded-lg placeholder:text-gray-400 text-slate-700',
             className,
           )}
           {...rest}

@@ -4,14 +4,21 @@ import { StepProcessPayment } from './steps/StepProcessPayment';
 import { StepResultTransaction } from './steps/StepResultTransaction';
 import { StepSummary } from './steps/StepSummary';
 
+const stepComponents = {
+  1: StepPaymentData,
+  2: StepSummary,
+  3: StepProcessPayment,
+  4: StepResultTransaction,
+};
+
 export const ModalTransaction = () => {
   const step = useEcommerceStore((state) => state.step);
-  return (
-    <>
-      {step === 1 && <StepPaymentData isOpen={step === 1} />}
-      {step === 2 && <StepSummary isOpen={step === 2} />}
-      {step === 3 && <StepProcessPayment isOpen={step === 3} />}
-      {step === 4 && <StepResultTransaction isOpen={step === 4} />}
-    </>
-  );
+
+  const CurrentStepComponent = stepComponents[step as keyof typeof stepComponents];
+
+  if (!CurrentStepComponent) {
+    return null;
+  }
+
+  return <CurrentStepComponent isOpen={true} />;
 };
