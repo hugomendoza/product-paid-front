@@ -1,4 +1,3 @@
-import { LoaderCircle } from 'lucide-react';
 import { useRef, useEffect } from 'react';
 
 interface ModalLayoutProps {
@@ -38,7 +37,6 @@ export const ModalLayout = ({ isOpen, onClose, title, children }: ModalLayoutPro
     >
       <header className="flex justify-between items-center py-3">
         <h2 className="font-semibold text-slate-600">{title}</h2>
-        <LoaderCircle className="animate-spin" />
         {/* <Button
           onClick={handleClose}
           variant="icon"
