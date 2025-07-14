@@ -1,4 +1,6 @@
 import { useRef, useEffect } from 'react';
+import { Button } from '../ui/Button/Button';
+import { CircleX } from 'lucide-react';
 
 interface ModalLayoutProps {
   isOpen: boolean;
@@ -29,23 +31,35 @@ export const ModalLayout = ({ isOpen, onClose, title, children }: ModalLayoutPro
     onClose();
   };
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (e.target === dialogRef.current) {
+      handleClose();
+    }
+  };
+
+  const handleEscKeydown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
+    if (e.key === 'Escape') {
+      handleClose();
+    }
+  };
+
   return (
     <dialog
       ref={dialogRef}
-      className="backdrop:bg-black backdrop:bg-opacity-50 max-w-lg w-11/12 rounded-xl bg-white shadow-xl px-4 sm:px-8 pb-4 sm:pb-6 pt-3 focus:outline-none mx-auto my-auto"
-      onClick={handleClose}
+      className="backdrop:bg-black/60 max-w-lg w-11/12 rounded-xl bg-white px-4 sm:px-8 pb-4 sm:pb-6 pt-3 focus:outline-none m-auto"
+      onClick={handleBackdropClick}
+      onKeyDown={handleEscKeydown}
     >
       <header className="flex justify-between items-center py-3">
         <h2 className="font-semibold text-slate-600">{title}</h2>
-        {/* <Button
+        <Button
           onClick={handleClose}
           variant="icon"
-          className="hover:bg-transparent focus:shadow-none focus:outline-none"
+          className="hover:bg-transparent focus:shadow-none focus:outline-none border-none"
         >
-          <IconSquareRoundedX size={26} color="#f58774" />
-        </Button> */}
+          <CircleX size={26} />
+        </Button>
       </header>
-      <hr />
       <section className="py-3">{children}</section>
     </dialog>
   );
