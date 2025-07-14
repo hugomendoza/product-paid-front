@@ -3,10 +3,17 @@ import { Button } from '../../ui/Button/Button';
 import { Input } from '../../ui/Input';
 
 import logoVisa from '../../../assets/svg/logo-visa.svg';
+import { useEcommerceStore } from '../../../store/store';
 
-export const StepPaymentData = () => {
+interface Props {
+  isOpen: boolean;
+}
+
+export const StepPaymentData = ({ isOpen }: Props) => {
+  const increment = useEcommerceStore((state) => state.increment);
+  const decrement = useEcommerceStore((state) => state.decrement);
   return (
-    <ModalLayout title="Datos de pago y entrega" isOpen={false} onClose={() => {}}>
+    <ModalLayout title="Datos de pago y entrega" isOpen={isOpen} onClose={() => {}}>
       <form className="space-y-4">
         <div className="space-y-4 border border-slate-200 p-4 rounded-xl mb-4">
           <div className="relative">
@@ -32,8 +39,12 @@ export const StepPaymentData = () => {
           </div>
         </div>
         <footer className="flex justify-end gap-4">
-          <Button>Cerrar</Button>
-          <Button>Continuar</Button>
+          <Button type="button" onClick={() => decrement(1)}>
+            Cerrar
+          </Button>
+          <Button type="button" onClick={() => increment(1)}>
+            Continuar
+          </Button>
         </footer>
       </form>
     </ModalLayout>

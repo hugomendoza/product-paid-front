@@ -1,8 +1,11 @@
 import { CreditCard, PackageOpen } from 'lucide-react';
 import { Button } from '../ui/Button/Button';
 import { Counter } from '../ui/Counter';
+import { useEcommerceStore } from '../../store/store';
 
 export const Product = () => {
+  const increment = useEcommerceStore((state) => state.increment);
+
   return (
     <article className="container sm:grid sm:grid-cols-2 gap-4 mt-8">
       <header>
@@ -41,7 +44,7 @@ export const Product = () => {
             </p>
           </div>
         </div>
-        <Button className="text-base sm:text-sm">
+        <Button className="text-base sm:text-sm" onClick={() => increment(1)}>
           <CreditCard /> Paga con tarjeta de crédito
         </Button>
       </div>

@@ -1,9 +1,16 @@
+import { useEcommerceStore } from '../../../store/store';
 import { ModalLayout } from '../../layouts/ModalLayout';
 import { Button } from '../../ui/Button/Button';
 
-export const StepSummary = () => {
+interface Props {
+  isOpen: boolean;
+}
+
+export const StepSummary = ({ isOpen }: Props) => {
+  const increment = useEcommerceStore((state) => state.increment);
+  const decrement = useEcommerceStore((state) => state.decrement);
   return (
-    <ModalLayout title="Resúmen de la compra" isOpen={false} onClose={() => {}}>
+    <ModalLayout title="Resúmen de la compra" isOpen={isOpen} onClose={() => {}}>
       <div className="space-y-4">
         <div className="space-y-4 border border-slate-200 p-4 rounded-xl">
           <h4 className="text-lg">Producto</h4>
@@ -39,8 +46,8 @@ export const StepSummary = () => {
           <p>telefono</p>
         </div>
         <footer className="flex justify-end gap-4">
-          <Button>Atras</Button>
-          <Button>Confirmar pago</Button>
+          <Button onClick={() => decrement(1)}>Atras</Button>
+          <Button onClick={() => increment(1)}>Confirmar pago</Button>
         </footer>
       </div>
     </ModalLayout>
