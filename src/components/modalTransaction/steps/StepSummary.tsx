@@ -1,54 +1,43 @@
-import { useEcommerceStore } from '../../../store/store';
 import { ModalLayout } from '../../layouts/ModalLayout';
-import { Button } from '../../ui/Button/Button';
+import { StepFooter } from './StepFooter';
 
 interface Props {
   isOpen: boolean;
 }
 
 export const StepSummary = ({ isOpen }: Props) => {
-  const increment = useEcommerceStore((state) => state.increment);
-  const decrement = useEcommerceStore((state) => state.decrement);
   return (
     <ModalLayout title="Resúmen de la compra" isOpen={isOpen} onClose={() => {}}>
-      <div className="space-y-4">
-        <div className="space-y-4 border border-slate-200 p-4 rounded-xl">
-          <h4 className="text-lg">Producto</h4>
-          <div className="flex justify-between">
-            <span className="font-medium">Product name</span>
-            <span>$200</span>
-          </div>
-        </div>
-        <div className="space-y-4 border border-slate-200 p-4 rounded-xl">
-          <h4 className="text-lg">Total de la compra</h4>
-          <div className="flex justify-between">
-            <span>Precio del producto</span>
-            <span>$200</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Tarifa base</span>
-            <span>$200</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Envío</span>
-            <span>$200</span>
+      <div className="space-y-3">
+        <div className="space-y-3 border border-slate-200 p-4 rounded-xl">
+          <h4 className="font-bold">Nombre del producto</h4>
+          <div className="flex justify-between flex-wrap space-y-2">
+            <p className="w-1/2">Cantidad</p>
+            <p className="w-1/2 text-right">5</p>
+            <p className="w-1/2">Precio</p>
+            <p className="w-1/2 text-right">$29.900</p>
+            <p className="w-1/2">Tarifa base</p>
+            <p className="w-1/2 text-right">$5.000</p>
+            <p className="w-1/2">Envío</p>
+            <p className="w-1/2 text-right">$15.000</p>
           </div>
           <hr />
-          <div className="flex justify-between font-bold text-lg">
+          <div className="flex justify-between font-bold">
             <span>Total</span>
             <span>$200</span>
           </div>
         </div>
-        <div className="space-y-4 border border-slate-200 p-4 rounded-xl">
-          <h4 className="text-lg">Datos de entrega</h4>
-          <p>calle 123</p>
-          <p>Bogotá</p>
-          <p>telefono</p>
+        <div className="flex justify-between flex-wrap space-y-2 border border-slate-200 p-4 rounded-xl">
+          <p className="w-1/2">Nombre</p>
+          <p className="w-1/2 text-right">Hugo Gonzales</p>
+          <p className="w-1/2">Dirección</p>
+          <p className="w-1/2 text-right">Calle 1 # 1-1</p>
+          <p className="w-1/2">Teléfono</p>
+          <p className="w-1/2 text-right">317 123 4567</p>
+          <p className="w-1/2">Ciudad</p>
+          <p className="w-1/2 text-right">Bogotá</p>
         </div>
-        <footer className="flex justify-end gap-4">
-          <Button onClick={() => decrement(1)}>Atras</Button>
-          <Button onClick={() => increment(1)}>Confirmar pago</Button>
-        </footer>
+        <StepFooter onBack={() => {}} onNext={() => {}} nextLabel="Realizar pago" />
       </div>
     </ModalLayout>
   );

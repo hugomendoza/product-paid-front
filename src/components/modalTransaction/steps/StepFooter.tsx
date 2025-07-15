@@ -18,7 +18,7 @@ export const StepFooter = ({
   buttonBackType = 'button',
 }: Props) => {
   return (
-    <footer className="flex justify-end gap-4 max-w-2/3 ml-auto mr-0">
+    <footer className="flex justify-end gap-4 sm:max-w-2/3 ml-auto mr-0">
       <Button variant="outline" type={buttonBackType} onClick={onBack}>
         {backLabel}
       </Button>
