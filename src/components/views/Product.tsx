@@ -39,8 +39,8 @@ export const Product = () => {
             />
           </div>
           <div className="flex-1 text-right">
-            <p className="text-xl font-bold text-black flex items-center justify-end">
-              <span className="text-sm mr-2">Valor total: </span>$0
+            <p className="text-lg font-bold text-black flex items-center justify-end">
+              <span className="text-xs mr-2">Valor total: </span>$0
             </p>
           </div>
         </div>

@@ -31,12 +31,6 @@ export const ModalLayout = ({ isOpen, onClose, title, children }: ModalLayoutPro
     onClose();
   };
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-    if (e.target === dialogRef.current) {
-      handleClose();
-    }
-  };
-
   const handleEscKeydown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
     if (e.key === 'Escape') {
       handleClose();
@@ -47,7 +41,6 @@ export const ModalLayout = ({ isOpen, onClose, title, children }: ModalLayoutPro
     <dialog
       ref={dialogRef}
       className="backdrop:bg-black/60 max-w-lg w-11/12 rounded-xl bg-white px-4 sm:px-8 pb-4 sm:pb-6 pt-3 focus:outline-none m-auto"
-      onClick={handleBackdropClick}
       onKeyDown={handleEscKeydown}
     >
       <header className="flex justify-between items-center py-3">

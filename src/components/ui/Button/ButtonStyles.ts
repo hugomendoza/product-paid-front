@@ -9,7 +9,7 @@ export const buttonStyles = cva(
         secondary: 'bg-sky-900 text-white border hover:shadow-none hover:bg-sky-700',
         outline: 'text-slate-700 border border-slate-500 hover:shadow-none hover:bg-slate-100',
         destructive: 'bg-red-500/70 text-white',
-        icon: 'size-10 p-0 border border-slate-400 hover:bg-slate-100 text-slate-500 hover:shadow-none',
+        icon: 'size-10 p-0 border border-slate-300 hover:bg-slate-100 text-slate-500 hover:shadow-none',
       },
     },
     defaultVariants: {
