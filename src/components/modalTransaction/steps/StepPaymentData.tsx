@@ -14,19 +14,20 @@ export const StepPaymentData = ({ isOpen }: Props) => {
   const { decrementStep } = useChangeSteps();
   const {
     formState,
+    errors,
+    loading,
     onInputChange,
     formatCreditCard,
     splitExpirationDate,
-    errors,
     onRegisterDataTransaction,
     clearError,
   } = useDataTrasaction();
 
   const { adress, cardHolder, cardNumber, city, cvv, expirationDate, name, phone } = formState;
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onRegisterDataTransaction(formState);
+    await onRegisterDataTransaction(formState);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -35,7 +36,7 @@ export const StepPaymentData = ({ isOpen }: Props) => {
 
   return (
     <ModalLayout title="Datos de pago y entrega" isOpen={isOpen} onClose={decrementStep}>
-      <form className="space-y-4" onSubmit={onSubmit}>
+      <form className="space-y-4" onSubmit={onSubmit} noValidate>
         <div className="space-y-4 border border-slate-200 p-4 rounded-xl mb-4">
           <div className="relative">
             <Input
@@ -77,7 +78,7 @@ export const StepPaymentData = ({ isOpen }: Props) => {
               className="w-full"
               id="cvv"
               name="cvv"
-              pattern="[0-9]{3}"
+              maxLength={4}
               value={cvv}
               placeholder="1234"
               onChange={onInputChange}
@@ -152,8 +153,8 @@ export const StepPaymentData = ({ isOpen }: Props) => {
           </div>
         </div>
         <StepFooter
+          disabled={loading}
           onBack={decrementStep}
-          onNext={() => {}}
           buttonNextType="submit"
           backLabel="Cerrar"
         />
