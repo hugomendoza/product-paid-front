@@ -1,11 +1,12 @@
 import { CreditCard, PackageOpen } from 'lucide-react';
 import { Button } from '../ui/Button/Button';
 import { Counter } from '../ui/Counter';
-import { useEcommerceStore } from '../../store/store';
+import { useStoreProduct } from '../../hooks/useStoreProduct';
 import type { Product } from '../../interfaces/product.interface';
 
-export const ProductPage = ({ description, image_url, name, price, stock }: Product) => {
-  const increment = useEcommerceStore((state) => state.increment);
+export const ProductPage = (props: Product) => {
+  const { name, description, price, stock, image_url } = props;
+  const { startTransaction } = useStoreProduct();
 
   return (
     <article className="container sm:grid sm:grid-cols-2 gap-4 mt-8">
@@ -47,7 +48,7 @@ export const ProductPage = ({ description, image_url, name, price, stock }: Prod
             </p>
           </div>
         </div>
-        <Button onClick={() => increment(1)}>
+        <Button onClick={() => startTransaction(props)}>
           <CreditCard /> Paga con tarjeta de crédito
         </Button>
       </div>

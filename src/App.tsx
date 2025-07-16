@@ -4,8 +4,6 @@ import { useFetch } from './hooks/useFetch';
 function App() {
   const { data, isLoading } = useFetch();
 
-  console.log({ data });
-
   return (
     <>
       <Nav />
