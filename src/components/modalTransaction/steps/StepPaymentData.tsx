@@ -44,8 +44,6 @@ export const StepPaymentData = ({ isOpen }: Props) => {
     setBrand(null);
   };
 
-  console.log({ brand });
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await onRegisterDataTransaction(formState);
@@ -153,10 +151,10 @@ export const StepPaymentData = ({ isOpen }: Props) => {
             <Input
               label="Correo electronico"
               className="w-full"
-              id="adress"
-              name="adress"
+              id="email"
+              name="email"
               value={email}
-              placeholder="Calle 87 # 12-34"
+              placeholder="tu@correo.com"
               onChange={onInputChange}
               onBlur={handleBlur}
               error={!!errors.email}

@@ -8,7 +8,7 @@ export interface CustomerSlice {
   clearCustomer: () => void;
 }
 
-export const createProductSlice: StateCreator<CustomerSlice> = (set) => ({
+export const createCustomerSlice: StateCreator<CustomerSlice> = (set) => ({
   customer: {} as Customer,
 
   storeCustomer: (customer) => set(() => ({ customer: customer })),

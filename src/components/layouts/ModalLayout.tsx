@@ -1,6 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { Button } from '../ui/Button/Button';
-import { CircleX } from 'lucide-react';
 
 interface ModalLayoutProps {
   isOpen: boolean;
@@ -45,13 +43,13 @@ export const ModalLayout = ({ isOpen, onClose, title, children }: ModalLayoutPro
     >
       <header className="flex justify-between items-center py-3">
         <h2 className="font-semibold text-slate-600">{title}</h2>
-        <Button
+        {/* <Button
           onClick={handleClose}
           variant="icon"
           className="hover:bg-transparent focus:shadow-none focus:outline-none border-none"
         >
           <CircleX size={26} />
-        </Button>
+        </Button> */}
       </header>
       <section className="py-3">{children}</section>
     </dialog>

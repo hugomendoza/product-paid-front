@@ -19,7 +19,7 @@ export function Counter({ value = 0, decrement, increment, disabled = false }: P
         disabled={disabled}
         type="text"
         value={value}
-        className="size-10 rounded-none"
+        className="size-10 rounded-none px-2 text-center"
         readOnly
       />
       <Button onClick={increment} variant="icon" disabled={disabled} className="rounded-l-none">

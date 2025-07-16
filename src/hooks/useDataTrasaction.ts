@@ -5,6 +5,7 @@ import { useForm } from './useForm';
 import { useStoreToken } from './useStoreToken';
 import { useZodErrors } from './useZod';
 import { useEcommerceStore } from '../store/store';
+import type { Customer } from '../interfaces/customer.interface';
 
 export const useDataTrasaction = () => {
   const dataTrasaction = {
@@ -24,6 +25,7 @@ export const useDataTrasaction = () => {
 
   const { errors, resetErrors, validateFields, clearError } = useZodErrors(dataTrasaction);
   const tokenCard = useEcommerceStore((state) => state.token);
+  const saveCustomer = useEcommerceStore((state) => state.storeCustomer);
   const { loading, onGetTokenCard } = useStoreToken();
 
   const { incrementStep } = useChangeSteps();
@@ -36,13 +38,21 @@ export const useDataTrasaction = () => {
     card_holder: formState.cardHolder,
   } as Card;
 
+  const customer = {
+    name: formState.name,
+    phone: formState.phone,
+    adress: formState.adress,
+    city: formState.city,
+    email: formState.email,
+  } as Customer;
+
   const onRegisterDataTransaction = async (formState: RegisterData) => {
-    console.log(tokenCard === '');
     try {
       registerDataSchema.parse(formState);
       if (tokenCard === '') {
         await onGetTokenCard(card);
       }
+      saveCustomer(customer);
       incrementStep();
     } catch (error) {
       validateFields(error as Error);
