@@ -16,6 +16,7 @@ export const useDataTrasaction = () => {
     expirationDate: '',
     name: '',
     phone: '',
+    email: '',
   } as RegisterData;
 
   const { formState, onInputChange, formatCreditCard, splitExpirationDate } =

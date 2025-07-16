@@ -1,10 +1,12 @@
+import { useEffect, useState } from 'react';
 import { useChangeSteps } from '../../../hooks/useChangeSteps';
+import { useDataTrasaction } from '../../../hooks/useDataTrasaction';
 import { StepFooter } from './StepFooter';
 import { ModalLayout } from '../../layouts/ModalLayout';
 import { Input } from '../../ui/Input';
 
 import logoVisa from '../../../assets/svg/logo-visa.svg';
-import { useDataTrasaction } from '../../../hooks/useDataTrasaction';
+import mastercard from '../../../assets/svg/logo-mc.svg';
 
 interface Props {
   isOpen: boolean;
@@ -12,6 +14,7 @@ interface Props {
 
 export const StepPaymentData = ({ isOpen }: Props) => {
   const { decrementStep } = useChangeSteps();
+  const [brand, setBrand] = useState<string | null>(null);
   const {
     formState,
     errors,
@@ -23,7 +26,25 @@ export const StepPaymentData = ({ isOpen }: Props) => {
     clearError,
   } = useDataTrasaction();
 
-  const { adress, cardHolder, cardNumber, city, cvv, expirationDate, name, phone } = formState;
+  const { adress, cardHolder, cardNumber, city, cvv, expirationDate, name, phone, email } =
+    formState;
+
+  const detectBrand = (value: string) => {
+    const visa = value.startsWith('4');
+    const mastercard = value.startsWith('5');
+
+    if (visa) {
+      setBrand('visa');
+      return;
+    }
+    if (mastercard) {
+      setBrand('mastercard');
+      return;
+    }
+    setBrand(null);
+  };
+
+  console.log({ brand });
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,6 +54,10 @@ export const StepPaymentData = ({ isOpen }: Props) => {
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     clearError(e.target.name);
   };
+
+  useEffect(() => {
+    detectBrand(cardNumber);
+  }, [cardNumber]);
 
   return (
     <ModalLayout title="Datos de pago y entrega" isOpen={isOpen} onClose={decrementStep}>
@@ -52,13 +77,24 @@ export const StepPaymentData = ({ isOpen }: Props) => {
               error={!!errors.cardNumber}
               warningMessage={errors.cardNumber}
             />
-            <figure
-              className={`absolute top-1/2 right-4 transform  ${
-                errors.cardNumber ? '-translate-y-[30%]' : 'translate-y-[30%]'
-              }`}
-            >
-              <img src={logoVisa} alt="" className="w-12" />
-            </figure>
+            {brand === 'visa' && (
+              <figure
+                className={`absolute top-1/2 right-4 transform  ${
+                  errors.cardNumber ? '-translate-y-[30%]' : 'translate-y-[30%]'
+                }`}
+              >
+                <img src={logoVisa} className="w-12" />
+              </figure>
+            )}
+            {brand === 'mastercard' && (
+              <figure
+                className={`absolute top-1/3 right-2 transform  ${
+                  errors.cardNumber ? '-translate-y-[0%]' : 'translate-y-[25%]'
+                }`}
+              >
+                <img src={mastercard} className="w-12" />
+              </figure>
+            )}
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input
@@ -115,8 +151,22 @@ export const StepPaymentData = ({ isOpen }: Props) => {
               warningMessage={errors.name}
             />
             <Input
-              label="Dirección de entrega"
+              label="Correo electronico"
               className="w-full"
+              id="adress"
+              name="adress"
+              value={email}
+              placeholder="Calle 87 # 12-34"
+              onChange={onInputChange}
+              onBlur={handleBlur}
+              error={!!errors.email}
+              warningMessage={errors.email}
+            />
+          </div>
+          <div>
+            <Input
+              label="Dirección de entrega"
+              className="w-full col-span-1 col-end-2"
               id="adress"
               name="adress"
               value={adress}
@@ -126,6 +176,8 @@ export const StepPaymentData = ({ isOpen }: Props) => {
               error={!!errors.adress}
               warningMessage={errors.adress}
             />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
             <Input
               label="Teléfono"
               className="w-full"

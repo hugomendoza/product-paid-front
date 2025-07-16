@@ -7,6 +7,7 @@ export const registerDataSchema = z.object({
   cardHolder: z.string().min(1, { message: 'Ingresa el nombre del titular' }),
   name: z.string().min(1, { message: 'Ingresa el nombre' }),
   adress: z.string().min(1, { message: 'Ingresa la dirección' }),
+  email: z.email({ message: 'Ingresa un correo válido' }),
   phone: z.string().min(1, { message: 'Ingresa el telefono' }),
   city: z.string().min(1, { message: 'Ingresa la ciudad' }),
 });
