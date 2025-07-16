@@ -1,10 +1,15 @@
-import { ModalTransaction, Nav, Product } from './components';
+import { ModalTransaction, Nav, ProductPage, ProductPageSkeleton } from './components';
+import { useFetch } from './hooks/useFetch';
 
 function App() {
+  const { data, isLoading } = useFetch();
+
+  console.log({ data });
+
   return (
     <>
       <Nav />
-      <Product />
+      {isLoading ? <ProductPageSkeleton /> : <ProductPage {...data} />}
       <ModalTransaction />
     </>
   );
