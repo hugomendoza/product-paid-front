@@ -204,7 +204,6 @@ La aplicación utiliza **Tailwind CSS v4** con configuración personalizada:
 - Tokenización de tarjetas de crédito
 - Validación de datos en el cliente
 - Variables de entorno para configuración sensible
-- Comunicación segura con el backend vía HTTPS
 
 ## 🚀 Despliegue
 
