@@ -1,4 +1,5 @@
 import { useChangeSteps } from '../../../hooks/useChangeSteps';
+import { useCreateTransaction } from '../../../hooks/useCreateTransaction';
 import { useEcommerceStore } from '../../../store/store';
 import { ModalLayout } from '../../layouts/ModalLayout';
 import { StepFooter } from './StepFooter';
@@ -11,8 +12,7 @@ export const StepSummary = ({ isOpen }: Props) => {
   const product = useEcommerceStore((state) => state.product);
   const quantity = useEcommerceStore((state) => state.quantity);
 
-  const customer = useEcommerceStore((state) => state.customer);
-
+  const { loading, customer, onCreateTransaction } = useCreateTransaction();
   const { decrementStep } = useChangeSteps();
 
   return (
@@ -53,7 +53,12 @@ export const StepSummary = ({ isOpen }: Props) => {
           <p className="w-1/2">Ciudad</p>
           <p className="w-1/2 text-right">{customer.city}</p>
         </div>
-        <StepFooter onBack={decrementStep} onNext={() => {}} nextLabel="Realizar pago" />
+        <StepFooter
+          disabled={loading}
+          onBack={decrementStep}
+          onNext={onCreateTransaction}
+          nextLabel="Realizar pago"
+        />
       </div>
     </ModalLayout>
   );
