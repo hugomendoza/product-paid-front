@@ -41,15 +41,8 @@ export const ModalLayout = ({ isOpen, onClose, title, children }: ModalLayoutPro
       className="backdrop:bg-black/60 max-w-lg w-11/12 rounded-xl bg-white px-4 sm:px-8 pb-4 sm:pb-6 pt-3 focus:outline-none m-auto"
       onKeyDown={handleEscKeydown}
     >
-      <header className="flex justify-between items-center py-3">
+      <header className="flex justify-center items-center py-3 text-center">
         <h2 className="font-semibold text-slate-600">{title}</h2>
-        {/* <Button
-          onClick={handleClose}
-          variant="icon"
-          className="hover:bg-transparent focus:shadow-none focus:outline-none border-none"
-        >
-          <CircleX size={26} />
-        </Button> */}
       </header>
       <section className="py-3">{children}</section>
     </dialog>

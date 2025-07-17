@@ -1,6 +1,7 @@
 import { Loader2 } from 'lucide-react';
 import { ModalLayout } from '../../layouts/ModalLayout';
 import { useChangeSteps } from '../../../hooks/useChangeSteps';
+import { useStatusTransaction } from '../../../hooks/useStatusTransaction';
 
 interface Props {
   isOpen: boolean;
@@ -8,8 +9,9 @@ interface Props {
 
 export const StepProcessPayment = ({ isOpen }: Props) => {
   const { decrementStep } = useChangeSteps();
+  useStatusTransaction();
   return (
-    <ModalLayout title="Resúmen de la compra" isOpen={isOpen} onClose={decrementStep}>
+    <ModalLayout title="Ya estamos cerca!!!!" isOpen={isOpen} onClose={decrementStep}>
       <div className="flex flex-col items-center justify-center py-8 space-y-4">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
         <p className="text-lg font-medium">Procesando pago...</p>

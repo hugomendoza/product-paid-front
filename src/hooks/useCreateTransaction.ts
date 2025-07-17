@@ -10,6 +10,7 @@ export const useCreateTransaction = () => {
   const product = useEcommerceStore((state) => state.product);
   const quantity = useEcommerceStore((state) => state.quantity);
   const token = useEcommerceStore((state) => state.token);
+  const storeIdProviderTransaction = useEcommerceStore((state) => state.storeIdTransaction);
   const [loading, setLoading] = useState<boolean>(false);
   const { incrementStep } = useChangeSteps();
 
@@ -33,7 +34,7 @@ export const useCreateTransaction = () => {
       const { transaction } = localTransaction;
       const { total_amount, id } = transaction;
 
-      await createProviderTransaction({
+      const { data } = await createProviderTransaction({
         amount_in_cents: +total_amount,
         currency: 'COP',
         customer_email: customer.email,
@@ -44,6 +45,8 @@ export const useCreateTransaction = () => {
           token,
         },
       });
+
+      storeIdProviderTransaction(data.data.id);
       incrementStep();
     } catch (error) {
       console.log({ error });
